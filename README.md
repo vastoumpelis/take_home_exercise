@@ -6,6 +6,10 @@ Throughout the test we're looking for great java style, driving your code throug
 
 Please take your time and make sure that the features you complete are done to a standard that you're happy with. Please complete the features in order.
 
+### Submitting your work:
+
+Submit your work as a pull request to this repository.
+
 ## Completed Features
 
 ### Basic Service
@@ -108,7 +112,7 @@ In order to not break existing clients, you and the team have decided to add a h
 
 # Dependencies
 
-- `gradle`: make sure is correctly installed on your machine. `brew` can help you with the installation.
+`gradle`: make sure is correctly installed on your machine. `brew` can help you with the installation.
 
 ## Useful commands
 
