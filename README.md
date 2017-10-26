@@ -1,10 +1,12 @@
 # Take home exercise
 
-For our tech test, we'd like you to take stripped-down version of our quoting engine, and then add some features. This is a RESTful service endpoint that takes a few details and works out the price for a delivery.
+For our tech test, we'd like you to take a stripped-down version of our quoting engine, and then add some features. This is a RESTful service endpoint that takes a few details and works out the price for a delivery.
 
 Throughout the test we're looking for great java style, driving your code through tests (and refactoring) and at all times doing the bare minimum possible to get the job done. If you don't like the code or tests that are there already, feel free to refactor as you add features.
 
 Please take your time and make sure that the features you complete are done to a standard that you're happy with. Please complete the features in order.
+
+Read this document until the end before starting your work. :)
 
 ### Submitting your work:
 
@@ -30,21 +32,8 @@ And responds with the following price:
   "price":             316
 }
 ```
-### Variable Prices By Distance
 
-The price we charge depends on the distance between two postcodes. We won't implement postcode geocoding here, so instead let's use a basic formula for working out the price for a quote between two postcodes. The process is to take the base-36 integer of each postcode, subtract the delivery postcode from the pickup postcode and then divide by some large number. If the result is negative, turn it into a positive.
-
-Hint: in java, this would be:
-
-    Long.valueOf("SW1A1AA", 36) - Long.valueOf("EC2A3LT", 36)
-
-If you have a better idea for a deterministic way of making a number from two postcodes, please feel free to use that instead.
-
-Update your service to calculate pricing based upon these rules.
-
-## Pending Features
-
-### Simple Variable Prices By Vehicle
+### 1) Simple Variable Prices By Vehicle
 
 Our price changes based upon the vehicle. Implement a "vehicle" attribute on the request, that takes one of the following values, applying the appropriate markup:
 
@@ -54,61 +43,73 @@ Our price changes based upon the vehicle. Implement a "vehicle" attribute on the
 * small_van: 30%
 * large_van: 40%
 
-The vehicle should also be returned in the response.
+For example, if the base price was 100, the `small_van` price with markup will be 130.
+The vehicle should also be returned in the response, and the price should be rounded to the nearest integer.
 
-### Vehicle Price Limits
+Request:
+```
+{
+  "pickup_postcode":   "SW1A1AA",
+  "delivery_postcode": "EC2A3LT",
+  "vehicle": "bicycle"
+}
+```
+Response:
+```
+{
+  "pickup_postcode":   "SW1A1AA",
+  "delivery_postcode": "EC2A3LT"
+  "vehicle": "bicycle"
+  "price": 348
+}
+```
 
-Each vehicle has a limit in the distance it can travel, which is reflected in the price. Update your logic so that each vehicle has an upper price limit, after which the next vehicle is selected:
+### 2) Variable Prices By Carrier
 
-* bicycle: 500
-* motorbike: 750
-* parcel_car: 1000
-* small_van: 1500
-* large_van: no limit
+Now we need the list of prices per carrier for the given `pickup_postcode`, `delivery_postcode` and `vehicle`.
 
-### Simple Volumetrics
+Use the JSON file in the `src/data` folder to fetch the carrier data and calculate the price.
+Bear in mind the carrier service should support the vehicle type. When calculating the price, add the service markup as well as the vehicle markup you have implemented in the earlier exercise to the carrier base price.
 
-Another feature of Shutl is that if the vehicle is not specified, we calculate what vehicle is required based upon the volumetrics (weights and dimensions) of the product.
+The `price_list` array needs to contain JSON objects sorted by `price`.
 
-Update the service to accept an array of products, each of which is a hash, ie:
+Example request:
+```
+{
+  "pickup_postcode":   "SW1A1AA",
+  "delivery_postcode": "EC2A3LT",
+  "vehicle": "small_van"
+}
+```
+Example response:
+```
+{
+  "pickup_postcode":   "SW1A1AA",
+  "delivery_postcode": "EC2A3LT"
+  "vehicle": "small_van"
+  "price_list": [
+    {"service": "RoyalPackages", "price": 300, "delivery_time": 5}
+    {"service": "Hercules", "price": 500, "delivery_time": 2},
+  ]
+}
+```
 
-    {
-      "pickup_postcode":   "SW1A1AA",
-      "delivery_postcode": "EC2A3LT",
-      "products" : [
-        {
-          weight: 10,
-          width: 50,
-          height: 50,
-          length: 50
-        }
-      ]
-    }
+### 3) Let's build a webpage!
 
-Weight is specified in kilograms, dimensions in centimetres.
+Build a webpage that makes the above calls.
 
-The service should then calculate the smallest possible vehicle which could be used for this job. The vehicle capacities are:
+It should contain a form with the following fields:
+`pickup_postcode`: Input,
+`delivery_postcode`: Input,
+`vehicle`: Dropdown containing all the vehicles
+The submit button will need to make an AJAX call to the service.
 
-* bicycle: Weight 3kg, Capacity: L30 x W25 x H10 cm
-* motorbike: Weight: 6kg Max. Capacity: L35 x W25 x H25 cm
-* parcel_car: Weight: 50kg Max. Capacity: L100 x W100 x H75 cm
-* small_van: Weight: 400kg Max. Capacity: L133 x W133 x H133 cm
-* large_van: unlimited
+Under the form, based on the response, list the services with the following info:
+`service`, `price`, `delivery_time`
+While the page is waiting for the response, an appropriate message should be displayed.
+If there were no services returned, an appropriate message should be displayed.
 
-Don't worry about working out the vehicle if there are multiple products - assume there will always be only one.
-
-### Complex Volumetrics
-
-... assume no longer. Update your calculation that decides which vehicle should be used to deal with multiple products. You can assume that the volumetrics are simply to be summed together.
-
-## Icebox
-
-### Vehicle Becomes Vehicle_Id
-
-A change in requirements has come up - that vehicle is renamed vehicle_id.
-
-In order to not break existing clients, you and the team have decided to add a header which will allow the client to specify the version of the API they want to use. Update your service to allow a header to be passed in, and to accept/show different the correct attribute depending on the version.
-
+**Bonus**: Make sure that the page displays well both on smaller and larger screens, ie that is `responsive`
 
 # Dependencies
 
