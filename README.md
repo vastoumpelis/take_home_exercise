@@ -36,6 +36,14 @@ And responds with the following price:
 }
 ```
 
+The price we charge depends on the distance between two postcodes. We are not implementing postcode geocoding here, so instead we are using basic formula for working out the price for a quote between two postcodes. The process is to take the base-36 integer of each postcode, subtract the delivery postcode from the pickup postcode and then divide by some large number. If the result is negative, turn it into a positive.
+
+Hint: in java, this would be:
+
+`Long.valueOf("SW1A1AA", 36) - Long.valueOf("EC2A3LT", 36)`
+
+If you have a better idea for a deterministic way of making a number from two postcodes, please feel free to use that instead. Update your service to calculate pricing based upon these rules.
+
 ## Features to complete
 
 ### 1) Simple variable prices by vehicle
