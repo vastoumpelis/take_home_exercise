@@ -112,21 +112,20 @@ Example response:
 Build a webpage that makes the above calls.
 
 It should contain a form with the following fields:
-`pickup_postcode`: Input,
-`delivery_postcode`: Input,
-`vehicle`: Dropdown containing all the vehicles
-The submit button will need to make an AJAX call to the service.
+`pickup_postcode`, `delivery_postcode` and `vehicle`.
 
 Under the form, based on the response, list the services with the following info:
 `service`, `price`, `delivery_time`
 While the page is waiting for the response, an appropriate message should be displayed.
 If there were no services returned, an appropriate message should be displayed.
 
-**Bonus**: Make sure that the page displays well both on smaller and larger screens, ie that is `responsive`
+**Bonus**:
+- Make sure that the page displays well both on smaller and larger screens, ie that is `responsive`.
+- The action linked to the submit button could retrieve the data from the service without refreshing the page.
 
 # Dependencies
 
-`gradle`: make sure is correctly installed on your machine. `brew` can help you with the installation.
+`gradle`: make sure is correctly installed on your machine. `brew` can help you with the installation if you are using a Mac Machine.
 
 ## Useful commands
 
