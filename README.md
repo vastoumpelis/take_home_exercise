@@ -12,7 +12,7 @@ Read this document until the end before starting your work. :)
 
 Submit your work as a pull request to this repository.
 
-## Completed Features
+## Completed Feature
 
 ### Basic Service
 
@@ -33,7 +33,9 @@ And responds with the following price:
 }
 ```
 
-### 1) Simple Variable Prices By Vehicle
+## Features to complete
+
+### 1) Simple variable prices by vehicle
 
 Our price changes based upon the vehicle. Implement a "vehicle" attribute on the request, that takes one of the following values, applying the appropriate markup:
 
@@ -64,7 +66,7 @@ Response:
 }
 ```
 
-### 2) Variable Prices By Carrier
+### 2) Variable prices by carrier
 
 Now we need the list of prices per carrier for the given `pickup_postcode`, `delivery_postcode` and `vehicle`.
 
