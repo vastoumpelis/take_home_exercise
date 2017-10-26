@@ -2,11 +2,14 @@
 
 For our tech test, we'd like you to take a stripped-down version of our quoting engine, and then add some features. This is a RESTful service endpoint that takes a few details and works out the price for a delivery.
 
-Throughout the test we're looking for great java style, driving your code through tests (and refactoring) and at all times doing the bare minimum possible to get the job done. If you don't like the code or tests that are there already, feel free to refactor as you add features.
+Throughout the test we're looking for great coding style, driving your code through tests (and refactoring) and at all times doing the bare minimum possible to get the job done. If you don't like the code or tests that are there already, feel free to refactor as you add features.
 
 Please take your time and make sure that the features you complete are done to a standard that you're happy with. Please complete the features in order.
 
-Read this document until the end before starting your work. :)
+Read this document until the end before starting your work. You are welcome to contact us if you have any question.
+
+Good luck! :)
+
 
 ### Submitting your work:
 
