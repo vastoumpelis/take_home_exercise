@@ -6,14 +6,14 @@ Throughout the test we're looking for great coding style, driving your code thro
 
 Please take your time and make sure that the features you complete are done to a standard that you're happy with. Please complete the features in order.
 
-Read this document until the end before starting your work. You are welcome to contact us if you have any question.
+Read this document thoroughly before starting your work. You are welcome to contact us if you have any question.
 
 Good luck! :)
 
 
 ### Submitting your work:
 
-Submit your work as a pull request to this repository.
+Submit your work as a pull request to this repository. You should be able to complete this in a day but you're free to come back to us in 3-5 days.
 
 ## Completed Feature
 
