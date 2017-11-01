@@ -1,0 +1,49 @@
+
+/* sets a basic wrapper to contain the page */
+.wrapper {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Specific style for displays with minimum width of 800px (landscapes)*/
+@media screen and (min-width: 800px) {
+    .wrapper {
+        max-width: 90%;
+    }
+}
+
+/* Specific style for displays with minimum width of 1000px (desktops)*/
+@media screen and (min-width: 1000px) {
+    .wrapper {
+        max-width: 75%;
+    }
+}
+
+body {
+  background: white;
+  font-family: Helvetica;
+  text-align: center;
+  margin: 0;
+    padding-top: 20px;
+}
+
+img{
+    height: auto;
+    width: auto;
+}
+
+input[type=text] {
+    padding: 2px 2px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus {
+    background-color: lightblue;
+}
